@@ -16,6 +16,7 @@ import Cart from "./pages/Cart";
 
 // componestes
 import Navber from "./components/Navber";
+import Fotter from "./components/Fotter";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/oder" element={<Oder />} />
         <Route path="/place-order" element={<PlaceOrder />} />
       </Routes>
+      <Fotter/>
 
     </div>
   )

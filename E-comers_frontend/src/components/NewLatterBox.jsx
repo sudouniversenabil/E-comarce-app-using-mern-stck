@@ -4,7 +4,8 @@ function NewLatterBox() {
 
     // and also dnot now what is preen defult do 
     const onSubmitDefault=(event)=>{
-        event.prevenDefault()
+        event.preventDefault()
+        console.log("hallo")
     }
   return (
     <div className='text-center'>
