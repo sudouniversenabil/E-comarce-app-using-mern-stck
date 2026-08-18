@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 
 import { Link } from 'react-router-dom'
 import { ShopContext } from '../context/Shopcontext'
-function productItem({ id, image, name, price }) {
+function ProductItem({ id, image, name, price }) {
   const { currency } = useContext(ShopContext)
 
   return (
@@ -16,4 +16,4 @@ function productItem({ id, image, name, price }) {
   )
 }
 
-export default productItem
+export default ProductItem
