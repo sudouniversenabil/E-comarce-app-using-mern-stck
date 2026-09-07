@@ -7,7 +7,7 @@ import ProductItem from '../components/ProductItem'
 
 function Collection() {
 
-  const { products } = useContext(ShopContext)
+  const { products,search,showSearch } = useContext(ShopContext)
   const [showFilter, setShowFilter] = useState(false)
 
   const [filterProduct, setFilterProducts] = useState([])
@@ -44,6 +44,10 @@ function Collection() {
 
   const applyFilter = () => {
     let productCopy = products.slice()
+    if (showSearch && search){
+      productCopy=productCopy.filter(item=> item.name.toLowerCase().includes(search.toLowerCase()))
+
+    }
     if (category.length > 0) {
       productCopy = productCopy.filter(item => category.includes(item.category))
     }
@@ -66,6 +70,7 @@ function Collection() {
         break
 
       default:
+        applyFilter()
         break
 
 
@@ -78,7 +83,7 @@ function Collection() {
 
   useEffect(() => {
     applyFilter()
-  }, [category, subCategory])
+  }, [category, subCategory,search,showSearch])
 
   useEffect(() => {
     shotbyfilterProduct()
@@ -162,7 +167,7 @@ function Collection() {
 
 
         </div>
-      </div>
+      </div>  
     </div>
   )
 }

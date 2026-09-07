@@ -17,12 +17,14 @@ import Cart from "./pages/Cart";
 // componestes
 import Navber from "./components/Navber";
 import Fotter from "./components/Fotter";
+import SearchBar from "./components/SearchBar";
 
 
 function App() {
   return (
     <div className="px-5  sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
       <Navber />
+      <SearchBar/>
       <Routes>
         <Route path="/" element={<Home />} />
         
