@@ -13,6 +13,7 @@ import Oder from "./pages/Oder";
 import PlaceOrder from "./pages/PlaceOrder";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
+import { ToastContainer, toast } from 'react-toastify';
 
 // componestes
 import Navber from "./components/Navber";
@@ -23,11 +24,12 @@ import SearchBar from "./components/SearchBar";
 function App() {
   return (
     <div className="px-5  sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+      <ToastContainer />
       <Navber />
-      <SearchBar/>
+      <SearchBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        
+
         <Route path="/collection" element={<Collection />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
@@ -37,7 +39,7 @@ function App() {
         <Route path="/oder" element={<Oder />} />
         <Route path="/place-order" element={<PlaceOrder />} />
       </Routes>
-      <Fotter/>
+      <Fotter />
 
     </div>
   )
