@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Title from '../components/Title'
-import { ShopContext } from '../context/Shopcontext'
+
 import { assets } from '../assets/assets'
+import { ShopContext } from '../context/Shopcontext'
+
+import { Cartotal } from '../components/Cartotal'
 
 // This function shows all cart data on the cart page
 function Cart() {
@@ -75,6 +78,7 @@ function Cart() {
 
               {/* Quantity */}
               <input
+
                 type="number"
                 min={1}
                 value={item.quantity}
@@ -98,6 +102,12 @@ function Cart() {
             </div>
           )
         })}
+      </div>
+      <div className='flex justify-end my-20'>
+        <div className='w-full sm : max-w-5'>
+          <Cartotal />
+        </div>
+
       </div>
     </div>
   )

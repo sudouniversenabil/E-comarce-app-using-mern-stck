@@ -34,8 +34,8 @@ const ShopContextprovider = (props) => {
     }
     SetCartItems(cartDAta)
   }
+  //this is a crt cunt code it is keep user how many cart add ther cart optino 
   const getCArtitems = () => {
-    //this is a crt cunt code it is keep user how many cart add ther cart optino 
     let totalconunt = 0
     for (const items in cartItems) {
       for (const item in cartItems[items]) {
@@ -48,8 +48,8 @@ const ShopContextprovider = (props) => {
 
         }
       }
-      return totalconunt
     }
+    return totalconunt
   }
   // this funtions works cart item del and modiy
 
@@ -58,10 +58,32 @@ const ShopContextprovider = (props) => {
     cartData[itemid][size] = quantity
     SetCartItems(cartData)
   }
+  // it show all add cart with all documet
+  const getCartAmount = () => {
+    let totalAmount = 0
 
+    for (const items in cartItems) {
+      let itemInfo = products.find(
+        (product) => product._id === items
+      )
+
+      for (const item in cartItems[items]) {
+        try {
+          if (cartItems[items][item] > 0) {
+            totalAmount +=
+              cartItems[items][item] * itemInfo.price
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+
+    return totalAmount
+  }
   const value = {
     products, currency, delivary_fee, search, showSearch, setSearch, setShowSearch,
-    addToCart, cartItems, getCArtitems, updateQuantity
+    addToCart, cartItems, getCArtitems, updateQuantity, getCartAmount
   }
   return (
     <ShopContext.Provider value={value}>
