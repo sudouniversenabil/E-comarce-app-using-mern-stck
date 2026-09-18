@@ -1,8 +1,12 @@
+
 import React, { useContext } from 'react'
+
 import { ShopContext } from '../context/Shopcontext'
+
 import Title from './Title'
 
 export const Cartotal = () => {
+
   const {
     currency,
     delivary_fee,
@@ -10,10 +14,12 @@ export const Cartotal = () => {
   } = useContext(ShopContext)
 
   const subtotal = getCartAmount()
+
   const total = subtotal === 0 ? 0 : subtotal + delivary_fee
 
   return (
     <div className='w-full'>
+
       <div className='text-2xl'>
         <Title text1={'cart'} text2={'total'} />
       </div>
@@ -40,6 +46,11 @@ export const Cartotal = () => {
         </div>
 
       </div>
+
     </div>
   )
 }
+
+
+// ```jsx
+// import { Cartotal } from '../components/Cartotal'

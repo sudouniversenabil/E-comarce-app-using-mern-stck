@@ -8,7 +8,7 @@ import { Cartotal } from '../components/Cartotal'
 
 // This function shows all cart data on the cart page
 function Cart() {
-  const { products, currency, cartItems, updateQuantity } =
+  const { products, currency, cartItems, updateQuantity, navigate } =
     useContext(ShopContext)
 
   const [cartdata, setCartdata] = useState([])
@@ -106,6 +106,10 @@ function Cart() {
       <div className='flex justify-end my-20'>
         <div className='w-full sm : max-w-5'>
           <Cartotal />
+          <div className='w-full text-end'>
+
+            <button onClick={() => navigate('/place-order')} className='bg-black text-white text-sm my-8 px-8 py-3'>proceed to chekout</button>
+          </div>
         </div>
 
       </div>
