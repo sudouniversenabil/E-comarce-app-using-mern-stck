@@ -1,14 +1,13 @@
 import mongoose from "mongoose";
 
-const connetdb= async ()=>{
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, { dbName: "E-commres" });
+    console.log("MongoDB connected");
+  } catch (err) {
+    console.error("MongoDB connection error:", err.message);
+    process.exit(1);
+  }
+};
 
-    if (!mongoose.connect(process.env.MONGODB_URI)){
-        throw new Error(" Data base cannot connectchke some probnlem in yor mogodb.js")
-
-        
-    }
-   await mongoose.connect(process.env.MONGODB_URI,{dbName:"E-commres"})
-
-}
-
-export default connetdb
+export default connectDB;

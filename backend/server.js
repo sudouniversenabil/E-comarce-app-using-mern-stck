@@ -6,7 +6,7 @@ import connectCloudinay from "./config/cladnary.js";
 import userRouter from "./route/userRoute.js";
 
 // Database
-
+await connetdb();
 // App config
 const app = express();
 const port = 4000;
