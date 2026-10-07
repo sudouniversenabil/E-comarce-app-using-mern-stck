@@ -1,11 +1,11 @@
 import "./index.css";
 
 // Routers
-import React from 'react'
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import cart from "./pages/Cart";
+// import cart from "./pages/Cart";
 import Collection from "./pages/Collection";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
@@ -13,13 +13,12 @@ import Oder from "./pages/Oder";
 import PlaceOrder from "./pages/PlaceOrder";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 // componestes
 import Navber from "./components/Navber";
 import Fotter from "./components/Fotter";
 import SearchBar from "./components/SearchBar";
-
 
 function App() {
   return (
@@ -40,9 +39,8 @@ function App() {
         <Route path="/place-order" element={<PlaceOrder />} />
       </Routes>
       <Fotter />
-
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
