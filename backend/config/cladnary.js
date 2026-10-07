@@ -8,4 +8,4 @@ const connectCloudinay=async()=>{
     })
 }
 
-export default connectCloudinay
+export default connectCloudinay 
