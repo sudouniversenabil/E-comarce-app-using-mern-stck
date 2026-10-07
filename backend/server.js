@@ -4,9 +4,13 @@ import "dotenv/config";
 import connetdb from "./config/mongodb.js";
 import connectCloudinay from "./config/cladnary.js";
 import userRouter from "./route/userRoute.js";
+import productRouter from "./route/productroute.js";
 
 // Database
 await connetdb();
+//claudinay 
+await connectCloudinay()
+
 // App config
 const app = express();
 const port = 4000;
@@ -15,8 +19,12 @@ const port = 4000;
 app.use(express.json());
 app.use(cors());
 
-// API endpoints
+// route endpoints
 app.use("/api/user", userRouter);
+app.use("/api/product", productRouter);  // ✅ correct
+
+//this is enpoints
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

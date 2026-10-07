@@ -74,7 +74,24 @@ const registerUser = async (req, res) => {
 
 //route for admin login
 const adminlogin = async (req, res) => {
-  res.send("hallo world ad hallo we are so hayy");
+  /*
+admin_email= "nan@gmail.com"
+
+admin_pass="12345s"
+  */
+  try {
+    const {email,pass}= req.body
+    if (email===process.env.admin_email&& pass===process.env.admin_pass){
+      const toekn =jwt.sign(email+pass,process.env.jwt_secret)
+      res.json({success:true,token})
+
+    }else{
+      res.json({success:false,messas:"wornd pass word"})
+    }
+  } catch (error) {
+    console.log(error)
+     res.json({success:true,mass:error.message})
+  }
 };
 
 export { loginUser, registerUser, adminlogin };
