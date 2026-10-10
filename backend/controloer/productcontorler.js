@@ -61,6 +61,7 @@ const listProudut = async (req, res) => {
     const produts= await product_model.find({})
     res.json({success:true,produts})
   } catch (error) {
+    console.log(error)
     res.json({prome:"some promonm",mass:error.message})
   }
 };

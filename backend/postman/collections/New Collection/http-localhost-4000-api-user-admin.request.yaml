@@ -1,0 +1,11 @@
+$kind: http-request
+name: http://localhost:4000/api/user/admin
+description: ""
+url: http://localhost:4000/api/user/admin
+method: POST
+headers:
+  toke: ""
+body:
+  type: json
+  content: '{"email":"n@gmail.com","pass":"12345"}'
+order: 1791381244569

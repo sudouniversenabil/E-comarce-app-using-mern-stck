@@ -74,7 +74,26 @@ const registerUser = async (req, res) => {
 
 // route for admin login
 const adminlogin = async (req, res) => {
-  res.send("hallo world ad hallo we are so hayy");
-};
+  try {
+    const { email, password } = req.body;
 
+    if (
+      email === process.env.ADMIN_EMAIL &&
+      password === process.env.ADMIN_PASSWORD
+    ) {
+      const token = jwt.sign({ role: "admin", email }, process.env.JWT_SECRET, {
+        expiresIn: "1d",
+      });
+      return res.json({ success: true, token });
+    }
+
+    res.json({ success: false, message: "Invalid credentials" });
+  } catch (e) {
+    console.log(e);
+    res.json({ success: false, message: e.message });
+  }
+};
+// JWT_SECRET="greatstack"
+// ADMIN_EMAIL="n@gmail.com"
+// ADMIN_PASSWORD="12345"
 export { loginUser, registerUser, adminlogin };
