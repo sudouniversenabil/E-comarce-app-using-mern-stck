@@ -2,6 +2,7 @@ import userModel from "../model/user_model.js";
 import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { v2 as cloudinary } from "cloudinary";
 
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
@@ -93,7 +94,46 @@ const adminlogin = async (req, res) => {
     res.json({ success: false, message: e.message });
   }
 };
-// JWT_SECRET="greatstack"
-// ADMIN_EMAIL="n@gmail.com"
-// ADMIN_PASSWORD="12345"
-export { loginUser, registerUser, adminlogin };
+
+// route for getting user profile (POST /api/user/profile)
+const getProfile = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const user = await userModel.findById(userId).select("-password");
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+    res.json({ success: true, user });
+  } catch (e) {
+    console.log(e);
+    res.json({ success: false, message: e.message });
+  }
+};
+
+// route for updating profile name + image (POST /api/user/update-profile)
+const updateProfile = async (req, res) => {
+  try {
+    const { userId, name } = req.body;
+    const update = {};
+
+    if (name && name.trim()) update.name = name.trim();
+
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        resource_type: "image",
+      });
+      update.image = result.secure_url;
+    }
+
+    const user = await userModel
+      .findByIdAndUpdate(userId, update, { new: true })
+      .select("-password");
+
+    res.json({ success: true, user });
+  } catch (e) {
+    console.log(e);
+    res.json({ success: false, message: e.message });
+  }
+};
+
+export { loginUser, registerUser, adminlogin, getProfile, updateProfile };

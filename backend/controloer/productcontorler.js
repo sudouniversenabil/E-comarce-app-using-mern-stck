@@ -62,7 +62,7 @@ const listProudut = async (req, res) => {
     res.json({success:true,produts})
   } catch (error) {
     console.log(error)
-    res.json({prome:"some promonm",mass:error.message})
+    res.json({success: false,message:error.message})
   }
 };
 

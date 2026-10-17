@@ -54,8 +54,8 @@ function Navber() {
           {token && (
             <div className='group-hover:block hidden absolute right-0 pt-4 z-10'>
               <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-blue-700 rounded'>
-                <p className='cursor-pointer hover:text-black'>My Profile</p>
-                <p  onClick={()=>navigate('/orders')} className='cursor-pointer hover:text-black'>Orders</p>
+                <p onClick={() => navigate('/profile')} className='cursor-pointer hover:text-black'>My Profile</p>
+                <p onClick={() => navigate('/orders')} className='cursor-pointer hover:text-black'>Orders</p>
                 <p onClick={logout} className='cursor-pointer hover:text-black'>Logout</p>
               </div>
             </div>
@@ -79,9 +79,8 @@ function Navber() {
 
       {/* Mobile sidebar */}
       <div
-        className={`absolute top-0 right-0 bottom-0 z-50 overflow-hidden bg-white transition-all ${
-          visible ? 'w-full' : 'w-0'
-        }`}
+        className={`absolute top-0 right-0 bottom-0 z-50 overflow-hidden bg-white transition-all ${visible ? 'w-full' : 'w-0'
+          }`}
       >
         <div className='flex flex-col text-gray-700'>
           <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-3 cursor-pointer'>

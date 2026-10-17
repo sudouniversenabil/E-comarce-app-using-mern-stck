@@ -14,7 +14,7 @@ import PlaceOrder from "./pages/PlaceOrder";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import { ToastContainer, toast } from "react-toastify";
-
+import Profile from './pages/Profile'
 // componestes
 import Navber from "./components/Navber";
 import Fotter from "./components/Fotter";
@@ -37,6 +37,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/oder" element={<Oder />} />
         <Route path="/place-order" element={<PlaceOrder />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
       <Fotter />
     </div>
