@@ -1,21 +1,28 @@
 import { createContext, useEffect, useState } from "react";
-import { products } from "../assets/assets";
+// import { products } from "../assets/assets";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const ShopContext = createContext()
 
 const ShopContextprovider = (props) => {
   const currency = "$"
   const delivary_fee = 10
+
+  const backendurl = import.meta.env.VITE_BG_URL
   const [search, setSearch] = useState('')
 
   const [showSearch, setShowSearch] = useState(false)
 
-  const [cartItems, SetCartItems] = useState({})
-  const navigate=useNavigate()
+  const [cartItems, setCartItems] = useState({})
+  const navigate = useNavigate()
+// bg er code 
+  const [products, setProducts] = useState([])
 
-  
+  const [token, setToken] = useState('')
+
+
 
   const addToCart = async (itemid, size) => {
     if (!size) {
@@ -36,7 +43,7 @@ const ShopContextprovider = (props) => {
       cartDAta[itemid] = {}
       cartDAta[itemid][size] = 1
     }
-    SetCartItems(cartDAta)
+    setCartItems(cartDAta)
   }
   //this is a crt cunt code it is keep user how many cart add ther cart optino 
   const getCArtitems = () => {
@@ -60,7 +67,7 @@ const ShopContextprovider = (props) => {
   const updateQuantity = async (itemid, size, quantity) => {
     let cartData = structuredClone((cartItems))
     cartData[itemid][size] = quantity
-    SetCartItems(cartData)
+    setCartItems(cartData)
   }
   // it show all add cart with all documet
   const getCartAmount = () => {
@@ -70,6 +77,7 @@ const ShopContextprovider = (props) => {
       let itemInfo = products.find(
         (product) => product._id === items
       )
+      if (!itemInfo) continue
 
       for (const item in cartItems[items]) {
         try {
@@ -85,9 +93,34 @@ const ShopContextprovider = (props) => {
 
     return totalAmount
   }
+
+  const getProdutsdata = async () => {
+    try {
+      const respone = await axios.get(backendurl + '/api/product/list')
+      console.log(respone.data)
+      if (respone.data.success){
+        setProducts(respone.data.products || [])
+      }else{
+        toast.error(respone.data.message)
+      }
+    } catch (error) {
+console.log(error)
+toast.error(error.message)
+    }
+  }
+  useEffect(() => {
+    getProdutsdata()
+  }, [])
+
+  // page reload dileo token thakbe
+  useEffect(() => {
+    const saved = localStorage.getItem('token')
+    if (saved) setToken(saved)
+  }, [])
+
   const value = {
     products, currency, delivary_fee, search, showSearch, setSearch, setShowSearch,
-    addToCart, cartItems, getCArtitems, updateQuantity, getCartAmount,navigate
+    addToCart, backendurl ,setToken,token, cartItems, getCArtitems, updateQuantity, getCartAmount, navigate,setCartItems
   }
   return (
     <ShopContext.Provider value={value}>

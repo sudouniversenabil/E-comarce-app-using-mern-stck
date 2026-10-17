@@ -104,7 +104,7 @@ function Cart() {
         })}
       </div>
       <div className='flex justify-end my-20'>
-        <div className='w-full sm : max-w-5'>
+        <div className='w-full sm:max-w-[450px]'>
           <Cartotal />
           <div className='w-full text-end'>
 

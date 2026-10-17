@@ -1,4 +1,3 @@
-
 import React, { useContext } from 'react'
 import Title from '../components/Title'
 import { Cartotal } from '../components/Cartotal'
@@ -7,7 +6,7 @@ import { useState } from 'react'
 import { ShopContext } from '../context/Shopcontext'
 
 function PlaceOrder() {
-  const [method, setMethod] = useState('Cod')
+  const [method, setMethod] = useState('cod')
   const {navigate} = useContext(ShopContext)
 
 

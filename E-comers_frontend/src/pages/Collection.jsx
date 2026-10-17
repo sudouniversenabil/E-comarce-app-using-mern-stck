@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import { ShopContext } from '../context/Shopcontext'
 import { assets } from '../assets/assets'
 import Title from '../components/Title'
@@ -10,7 +10,6 @@ function Collection() {
   const { products,search,showSearch } = useContext(ShopContext)
   const [showFilter, setShowFilter] = useState(false)
 
-  const [filterProduct, setFilterProducts] = useState([])
   const [category, setCategory] = useState([])
   const [subCategory, setSubCategory] = useState([])
   const [sortType, setsortType] = useState('relavent')
@@ -42,7 +41,8 @@ function Collection() {
 
   }
 
-  const applyFilter = () => {
+  // filter + search + sort ekshathe (sort ar hariye jabe na)
+  const filterProduct = useMemo(() => {
     let productCopy = products.slice()
     if (showSearch && search){
       productCopy=productCopy.filter(item=> item.name.toLowerCase().includes(search.toLowerCase()))
@@ -54,46 +54,19 @@ function Collection() {
     if (subCategory.length > 0) {
       productCopy = productCopy.filter(i => subCategory.includes(i.subCategory))
     }
-    setFilterProducts(productCopy)
-  }
-
-
-
-  const shotbyfilterProduct = () => {
-    let fpcopy = filterProduct.slice()
-    switch (sortType) {
-      case 'low-high':
-        setFilterProducts(fpcopy.sort((a, b) => (a.price - b.price)))
-        break
-      case 'high-low':
-        setFilterProducts(fpcopy.sort((a, b) => (b.price - a.price)))
-        break
-
-      default:
-        applyFilter()
-        break
-
-
-
+    if (sortType === 'low-high') {
+      productCopy.sort((a, b) => (a.price - b.price))
+    } else if (sortType === 'high-low') {
+      productCopy.sort((a, b) => (b.price - a.price))
     }
-  }
-  // useEffect(() => {
-  //   setFilterProducts(products)
-  // }, [products])
-
-  useEffect(() => {
-    applyFilter()
-  }, [category, subCategory,search,showSearch])
-
-  useEffect(() => {
-    shotbyfilterProduct()
-  }, [sortType])
+    return productCopy
+  }, [products, search, showSearch, category, subCategory, sortType])
 
   return (
     <div className='flex flex-col sm:flex-row gap-1 pt-10 border-t '>
       {/* filter option */}
       <div className='min-w-60'>
-        <p className='my-2 text-xl flex items-center cursor-pointer gap -2' onClick={() => setShowFilter(!showFilter)}>Filters
+        <p className='my-2 text-xl flex items-center cursor-pointer gap-2' onClick={() => setShowFilter(!showFilter)}>Filters
           <img src={assets.dropdown_icon} className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ""}`} alt="" />
         </p>
         {/* catagory filter */}

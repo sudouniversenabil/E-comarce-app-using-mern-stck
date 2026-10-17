@@ -4,7 +4,7 @@ import { assets } from '../assets/assets'
 function Hero() {
     return (
         <div className='flex flex-col sm:flex-row border border-gray-600 '>
-            <div className=' w-full sm:1/2 flex items-center justify-center py-10 sm:py-0'>
+            <div className=' w-full sm:w-1/2 flex items-center justify-center py-10 sm:py-0'>
 
 
                 <div className='text-[#414141]'>
@@ -21,7 +21,7 @@ function Hero() {
                 </div>
             </div>
             {/* hero riht side */}
-            <img src={assets.hero_img} className='w-full sm-w-1/2' alt="" />
+            <img src={assets.hero_img} className='w-full sm:w-1/2' alt="" />
         </div>
     )
 }

@@ -21,7 +21,7 @@ const Product = () => {
   useEffect(() => {
     console.log(productdata)
     fetchProductData()
-  }, [productdata])
+  }, [productId, products])
   // console.log(productId)
 
   return productdata ? (
@@ -33,13 +33,12 @@ const Product = () => {
           <div className='flex sm:flex-col overflow-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full'>
             {
               productdata.image.map((item, index) => (
-                <img onClick={() => seImage(item)} src={item} key={index} className='w-[24%] sm:w-full sm:mb-3 	
-flex-shrink:0 cursor-pointer' alt="" />
+                <img onClick={() => seImage(item)} src={item} key={index} className='w-[24%] sm:w-full sm:mb-3 shrink-0 cursor-pointer' alt="" />
               ))
             }
           </div>
           <div className='w-full sm:w-4/5'>
-            <img className='w-[50%] h-au' src={image} alt="" />
+            <img className='w-[50%] h-auto' src={image} alt="" />
           </div>
         </div>
         {/* =========prodct info============ */}
@@ -56,7 +55,7 @@ flex-shrink:0 cursor-pointer' alt="" />
           <p className='mt-5 text-2xl font-medium'> {currency}{productdata.price}</p>
           <p className='mt-5 text-gray-500 w-[80%]'>{productdata.description}</p>
 
-          <div className='flex flex-col gap-4 my my-8'>
+          <div className='flex flex-col gap-4 my-8'>
             <p>Select Size</p>
             <div className='flex gap-2 cursor-pointer bg-amber-100'>
               {productdata.sizes.map((item, index) => (
@@ -66,20 +65,20 @@ flex-shrink:0 cursor-pointer' alt="" />
           </div>
 
           <button onClick={() => addToCart(productdata._id, size)} className='bg-black text-white p-7 text-sm active:bg-red-700'>ADD TO CART</button>
-          <hr className='mt-8 sm:w-80%' />
+          <hr className='mt-8 sm:w-4/5' />
           <div className='text-sm text-gray-500 mt-5 flex flex-col gap-1'>
             <p>100& Original Product</p>
             <p>Easy return and exahange policy within 7 days</p>
             <p>Cash on delyvery and exachage policy within 7 days </p>
           </div>
         </div>
-        {/* -------Discrimtpn & and Review section------------ */}
-        <div className=' mt-20'>
-          <div className='flex'>
-            <b className='border px-5 py-3 text-sm'>Descrimption</b>
-            <p className='border pox-5 py-3 text-sm'>Reviews(122)</p>
+      </div>
+      {/* -------Discrimtpn & and Review section------------ */}
+      <div className=' mt-20'>
+        <div className='flex'>
+          <b className='border px-5 py-3 text-sm'>Descrimption</b>
+          <p className='border px-5 py-3 text-sm'>Reviews(122)</p>
 
-          </div>
         </div>
       </div>
       {/* display the realdate product */}
